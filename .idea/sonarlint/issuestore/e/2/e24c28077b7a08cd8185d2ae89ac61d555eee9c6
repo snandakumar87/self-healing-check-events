@@ -1,0 +1,6 @@
+
+nsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(ÚçÙŠûÿÿÿÿ8¹¾þ«Œ.
+€squid:S1488"bImmediately return this expression instead of assigning it to the temporary variable "dmnRuntime".(­üÙ‡8›¬ê«Œ.
+]squid:S1118
+":Add a private constructor to hide the implicit public one.(ÑÏªØúÿÿÿÿ8›¬ê«Œ.
+ksquid:UselessImportCheck";Remove this unused import 'org.kie.api.runtime.KieSession'.(‰ôãñÿÿÿÿÿ8›¬ê«Œ.

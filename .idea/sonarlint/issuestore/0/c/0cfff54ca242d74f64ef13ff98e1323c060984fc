@@ -1,0 +1,9 @@
+
+Osquid:S1153`"1Directly append the argument of String.valueOf().(ôÈºÓ8°ïôºŒ.
+[
+squid:S106@"9Replace this use of System.out or System.err by a logger.(à”Àøÿÿÿÿ8¦îƒ¯Œ.
+Fsquid:S1148i"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8¦îƒ¯Œ.
+nsquid:CommentedOutCodeLineC"<This block of commented-out lines of code should be removed.(î¿©†ùÿÿÿÿ8¦îƒ¯Œ.
+V
+squid:S106G"9Replace this use of System.out or System.err by a logger.(¨Œ8¦îƒ¯Œ.
+Jsquid:S1068",Remove this unused "KSESSION" private field.(ëµ³¤8¦îƒ¯Œ.

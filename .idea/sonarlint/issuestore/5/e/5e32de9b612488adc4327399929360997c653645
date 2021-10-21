@@ -1,0 +1,7 @@
+
+[
+squid:S106"9Replace this use of System.out or System.err by a logger.(ìíš¹þÿÿÿÿ8Þê¬ÑŒ.
+Fsquid:S1148+"#Use a logger to log this exception.(€ÉÔ…ýÿÿÿÿ8¡½¿ÑŒ.
+Osquid:S1068"1Remove this unused "consumerCount" private field.(ÔÈâØ8Þê¬ÑŒ.
+¬squid:S1845"ˆRename field "LOG" to prevent any misunderstanding/clash with field "log" defined in superclass "org.apache.camel.builder.RouteBuilder".(Ÿõ‘ªÿÿÿÿÿ8Þê¬ÑŒ.
+Jsquid:S1068"'Remove this unused "LOG" private field.(Ÿõ‘ªÿÿÿÿÿ8Þê¬ÑŒ.
