@@ -55,7 +55,7 @@ public class FilterStrategy implements AggregationStrategy {
 
                 System.out.println(example.getCheck().getMetadata().getName());
 
-                System.out.println(new Gson().toJson(sensuEvents));
+                System.out.println("sensuevent"+new Gson().toJson(sensuEvents));
                 HashMap<String, List<ApbRuns>> aggregateMap = null;
 
                 DMNContext dmnContext = dmnClient.newContext();
@@ -70,7 +70,6 @@ public class FilterStrategy implements AggregationStrategy {
 
                 dmnContext.set("Frequency", 2);
                 dmnContext.set("Interval", 1);
-                System.out.println(dmnContext);
                 ServiceResponse<DMNResult> serverResp =
                         dmnClient.evaluateAll("DMNListExample_1.0.0",
                                 namespace,
