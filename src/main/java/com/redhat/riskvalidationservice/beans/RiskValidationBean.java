@@ -39,58 +39,6 @@ public class RiskValidationBean {
 		this.kieContainer = kieContainer;
 	}
 
-	public String validateTxn(Exchange body) {
-
-		System.out.println("inside validate");
-
-		ApbRuns apbRuns = new Gson().fromJson(body.getIn().getBody().toString(),ApbRuns.class);
-
-		DMNRuntime dmnRuntime = RuleSessionFactory.createDMNRuntime();
-		System.out.println(dmnRuntime);
-		String namespace = "https://kiegroup.org/dmn/_C57E89DD-6F36-4590-809A-0B8E742F2676";
-		String modelName = "ProcessFailureDMN";
-		DMNModel dmnModel = dmnRuntime.getModel(namespace, modelName);
-
-
-		Example example = new Gson().fromJson(body.getContext().getGlobalOption("sensuEvents"),Example.class);
-
-		SensuEvents sensuEvents = new SensuEvents();
-		sensuEvents.setCheckType(example.getCheck().getMetadata().getName());
-		sensuEvents.setEventDate(example.getCheck().getExecuted());
-		sensuEvents.setHostName(example.getEntity().getMetadata().getName());
-		sensuEvents.setStatus(String.valueOf(example.getCheck().getStatus()));
-
-
-		DMNContext dmnContext = dmnRuntime.newContext();
-		dmnContext.set("SensuEvents", sensuEvents);
-		dmnContext.set("ApbRuns",apbRuns.getRunningList());
-
-		DMNResult dmnResult = dmnRuntime.evaluateAll(dmnModel, dmnContext);
-
-		DMNDecisionResult resultOffer = dmnResult.getDecisionResultByName("Invoke?");
-		DMNDecisionResult playbook = dmnResult.getDecisionResultByName("Playbook");
-
-		System.out.println(resultOffer);
-
-		System.out.println("invoke"+resultOffer.getResult());
-		System.out.println("playbook"+playbook.getResult());
-
-		if(resultOffer.getResult()!=null) {
-			ApbRuns apb = new ApbRuns();
-			apb.setApbName(playbook.getResult().toString());
-			apb.setCheckName(sensuEvents.getCheckType());
-			apb.setHostName(sensuEvents.getHostName());
-			apb.setRunDate(new Date().getTime());
-
-			Map<String,String> stringMap = new HashMap<>();
-			body.getContext().setGlobalOptions(stringMap);
-			return new Gson().toJson(apb);
-		}
-
-
-		return null;
-	}
-
 	public String addReferenceData(Exchange exchange) {
 
 		if (null != exchange.getIn().getBody()) {
