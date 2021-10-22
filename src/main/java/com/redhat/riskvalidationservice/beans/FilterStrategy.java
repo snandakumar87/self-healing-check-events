@@ -60,7 +60,7 @@ public class FilterStrategy implements AggregationStrategy {
 
                 DMNContext dmnContext = dmnClient.newContext();
                 dmnContext.set("SensuEvents", sensuEvents);
-                if (null != runs) {
+                if (null != runs && runs.get(example.getEntity().getSystem().getHostname()) != null) {
                     dmnContext.set("ApbRuns", runs.get(example.getEntity().getSystem().getHostname()));
                     System.out.println(runs.get(example.getEntity().getSystem().getHostname()));
                 } else {
