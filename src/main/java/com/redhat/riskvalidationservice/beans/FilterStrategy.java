@@ -117,6 +117,7 @@ public class FilterStrategy implements AggregationStrategy {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return null;
     }
 
 }
