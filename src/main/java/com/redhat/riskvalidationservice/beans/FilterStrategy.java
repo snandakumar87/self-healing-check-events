@@ -26,7 +26,7 @@ public class FilterStrategy implements AggregationStrategy {
             System.out.println("hello");
 
             KieServicesConfiguration conf =
-                    KieServicesFactory.newRestConfiguration("http://rhpam-trial-kieserver:80", "adminUser", "RedHat");
+                    KieServicesFactory.newRestConfiguration("http://rhpam-trial-kieserver:80/services/rest/server", "adminUser", "RedHat");
 
             conf.setMarshallingFormat(MarshallingFormat.JSON);
 
