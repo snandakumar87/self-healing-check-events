@@ -75,7 +75,7 @@ public class FilterStrategy implements AggregationStrategy {
                         dmnContext.get("Interval"));
 
                 ServiceResponse<DMNResult> serverResp =
-                        dmnClient.evaluateAll("DMNListExample_1.0.0",
+                        dmnClient.evaluateAll("DMNListExample",
                                 namespace,
                                 modelName,
                                 dmnContext);
