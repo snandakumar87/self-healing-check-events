@@ -12,8 +12,7 @@ import java.util.logging.Logger;
 public class RiskValidationRouteBuilder extends RouteBuilder {
 
 	private static final Logger LOG = Logger.getLogger(RiskValidationRouteBuilder.class.getName());
-
-	private String kafkaBootstrap = "localhost:9092";
+	private String kafkaBootstrap = "my-cluster-kafka-brokers:9092";
 	private String kafkaCreditTransferCreditorTopic = "sensu";
 	private String consumerMaxPollRecords ="50000";
 	private String consumerCount = "3";
