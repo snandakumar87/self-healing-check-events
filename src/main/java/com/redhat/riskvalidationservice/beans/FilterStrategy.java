@@ -70,6 +70,10 @@ public class FilterStrategy implements AggregationStrategy {
 
                 dmnContext.set("Frequency", 2);
                 dmnContext.set("Interval", 1);
+
+                System.out.println("dmn context"+dmnContext.get("sensuevent")+","+dmnContext.get("ApbRuns")+","+dmnContext.get("Frequency")+","+
+                        dmnContext.get("Interval"));
+
                 ServiceResponse<DMNResult> serverResp =
                         dmnClient.evaluateAll("DMNListExample_1.0.0",
                                 namespace,
