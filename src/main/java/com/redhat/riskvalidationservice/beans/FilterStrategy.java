@@ -83,6 +83,8 @@ public class FilterStrategy implements AggregationStrategy {
                                 modelName,
                                 dmnContext);
 
+                System.out.println("DMN rsponse"+new ObjectMapper().writeValueAsString(serverResp.getMsg()));
+
                 DMNResult dmnResult = serverResp.getResult();
 
                 System.out.println("Final result"+new ObjectMapper().writeValueAsString(dmnResult.getDecisionResults()));
