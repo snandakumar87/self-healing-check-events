@@ -27,7 +27,7 @@ public class FilterStrategy implements AggregationStrategy {
         try {
 
             RestTemplate restTemplate = new RestTemplate();
-            String baseUri = "http://rhpam-trial-kieserver:8080/services/rest/server/containers/EventAutomationDecision_1.0.0/dmn/models/ProcessFailureDMN/dmnresult";
+            String baseUri = "http://rhpam-trial-kieserver:8080/services/rest/server/containers/EventAutomationDecision_3.0.0/dmn/models/ProcessFailureDMN/dmnresult";
 
             org.springframework.http.HttpHeaders httpHeaders = new HttpHeaders();
             httpHeaders.set("accept","application/json");
@@ -104,7 +104,9 @@ public class FilterStrategy implements AggregationStrategy {
                 for(Map resultMap: decisionResults) {
                     if(resultMap.get("decisionName").equals("Playbook")){
                         System.out.println(resultMap.get("result"));
-                        playbook = (String)resultMap.get("result");
+                        if(playbook != null) {
+                            playbook = (String) resultMap.get("result");
+                        }
                     }
                 }
 
