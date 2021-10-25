@@ -10,10 +10,8 @@ import org.apache.camel.processor.aggregate.AggregationStrategy;
 import org.kie.dmn.api.core.*;
 import org.kie.server.api.marshalling.MarshallingFormat;
 import org.kie.server.api.model.ServiceResponse;
-import org.kie.server.client.DMNServicesClient;
-import org.kie.server.client.KieServicesClient;
-import org.kie.server.client.KieServicesConfiguration;
-import org.kie.server.client.KieServicesFactory;
+import org.kie.server.client.*;
+import org.kie.server.client.credentials.EnteredCredentialsProvider;
 
 import java.util.*;
 
@@ -25,13 +23,14 @@ public class FilterStrategy implements AggregationStrategy {
         try {
 
             System.out.println("hello");
+            CredentialsProvider credentialsProvider = new EnteredCredentialsProvider("adminUser", "RedHat");
 
-            KieServicesConfiguration conf =
-                    KieServicesFactory.newRestConfiguration("http://rhpam-trial-kieserver-http-self-healing.apps.cluster-4htkm.4htkm.sandbox210.opentlc.com/services/rest/server", "adminUser", "RedHat");
+            KieServicesConfiguration kieServicesConfig = KieServicesFactory.newRestConfiguration("http://rhpam-trial-kieserver-http-self-healing.apps.cluster-4htkm.4htkm.sandbox210.opentlc.com/services/rest/server", credentialsProvider);
 
-            conf.setMarshallingFormat(MarshallingFormat.JSON);
 
-            KieServicesClient kieServicesClient = KieServicesFactory.newKieServicesClient(conf);
+            kieServicesConfig.setMarshallingFormat(MarshallingFormat.JSON);
+
+            KieServicesClient kieServicesClient = KieServicesFactory.newKieServicesClient(kieServicesConfig);
 
             DMNServicesClient dmnClient = kieServicesClient.getServicesClient(DMNServicesClient.class);
 
