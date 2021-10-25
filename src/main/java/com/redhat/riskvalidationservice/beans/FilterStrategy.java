@@ -130,7 +130,7 @@ public class FilterStrategy implements AggregationStrategy {
 //                System.out.println("playbook" + playbook.getResult());
 //
 //
-//                if (playbook.getResult() != null) {
+                if (playbook!= null) {
                     ApbRuns apb = new ApbRuns();
                     apb.setApbName(playbook);
                     apb.setCheckName(sensuEvents.getCheckType());
@@ -140,10 +140,10 @@ public class FilterStrategy implements AggregationStrategy {
 
                     newExchange.getIn().setBody(new Gson().toJson(apb));
 
-//                } else {
-//                    newExchange.getIn().setBody(null);
-//                }
-//
+                } else {
+                    newExchange.getIn().setBody(null);
+                }
+
 
             } else {
                 Map<String, List<ApbRuns>> map = newExchange.getIn().getBody(Map.class);
