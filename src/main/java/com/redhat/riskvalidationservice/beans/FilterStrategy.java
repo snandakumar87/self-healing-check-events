@@ -43,7 +43,7 @@ public class FilterStrategy implements AggregationStrategy {
 
                 String namespace = "https://kiegroup.org/dmn/_C57E89DD-6F36-4590-809A-0B8E742F2676";
                 String modelName = "ProcessFailureDMN";
-//            DMNModel dmnModel = dmnRuntime.getModel(namespace, modelName);
+//            DMNModel dmnModel = dmnClient.getModel(namespace, modelName);
 
 
                 SensuEvents sensuEvents = new SensuEvents();
@@ -79,6 +79,8 @@ public class FilterStrategy implements AggregationStrategy {
 
                 ServiceResponse<DMNResult> serverResp =
                         dmnClient.evaluateAll("EventAutomationDecision_2.0.0",
+                                namespace,
+                                modelName,
                                 dmnContext);
 
                 DMNResult dmnResult = serverResp.getResult();
