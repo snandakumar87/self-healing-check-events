@@ -76,9 +76,7 @@ public class FilterStrategy implements AggregationStrategy {
                         dmnContext.get("Interval"));
 
                 ServiceResponse<DMNResult> serverResp =
-                        dmnClient.evaluateAll("EventAutomationDecision",
-                                namespace,
-                                modelName,
+                        dmnClient.evaluateAll("EventAutomationDecision_2.0.0",
                                 dmnContext);
 
                 DMNResult dmnResult = serverResp.getResult();
