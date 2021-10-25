@@ -64,14 +64,13 @@
         <type>pom</type>
         <scope>import</scope>
       </dependency>
-      <!-- https://mvnrepository.com/artifact/com.redhat.ba/ba-platform-bom -->
       <dependency>
         <groupId>com.redhat.ba</groupId>
         <artifactId>ba-platform-bom</artifactId>
         <version>7.11.1.redhat-00001</version>
+        <scope>import</scope>
         <type>pom</type>
       </dependency>
-
 
     </dependencies>
   </dependencyManagement>
