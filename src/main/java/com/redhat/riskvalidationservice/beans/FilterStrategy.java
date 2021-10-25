@@ -87,7 +87,7 @@ public class FilterStrategy implements AggregationStrategy {
                 dmnContext.set("Frequency", 2);
                 dmnContext.set("Interval", 1);
 
-                String json = "{\"SensuEvents\":"+dmnContext.get("SensuEvents")+",\"ApbRuns\""+dmnContext.get("ApbRuns")+",\"Frequency\""+dmnContext.get("Frequency")+",\"Interval\""+dmnContext.get("Interval")+"}";
+                String json = "{\"SensuEvents\":"+dmnContext.get("SensuEvents")+",\"ApbRuns\":"+dmnContext.get("ApbRuns")+",\"Frequency\":"+dmnContext.get("Frequency")+",\"Interval\":"+dmnContext.get("Interval")+"}";
                 System.out.println(json);
 
                 System.out.println("dmn context"+dmnContext.get("SensuEvents")+","+dmnContext.get("ApbRuns")+","+dmnContext.get("Frequency")+","+
