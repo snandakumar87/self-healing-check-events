@@ -67,7 +67,7 @@
       <dependency>
         <groupId>com.redhat.ba</groupId>
         <artifactId>ba-platform-bom</artifactId>
-        <version>7.5.1.redhat-00001</version>
+        <version>7.52.0.Final-redhat-00008</version>
         <scope>import</scope>
         <type>pom</type>
       </dependency>
