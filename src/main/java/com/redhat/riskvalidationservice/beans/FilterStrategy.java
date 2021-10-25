@@ -34,6 +34,8 @@ public class FilterStrategy implements AggregationStrategy {
             KieServicesClient kieServicesClient = KieServicesFactory.newKieServicesClient(conf);
 
             DMNServicesClient dmnClient = kieServicesClient.getServicesClient(DMNServicesClient.class);
+
+            System.out.println("read clients");
             if (newExchange.getFromRouteId().equals("readSensu")) {
 
                 System.out.println("inside validate");
