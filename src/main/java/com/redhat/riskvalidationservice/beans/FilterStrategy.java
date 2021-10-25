@@ -1,5 +1,6 @@
 package com.redhat.riskvalidationservice.beans;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.redhat.riskvalidationservice.datamodels.ApbRuns;
 import com.redhat.riskvalidationservice.datamodels.Example;
@@ -81,6 +82,8 @@ public class FilterStrategy implements AggregationStrategy {
                                 dmnContext);
 
                 DMNResult dmnResult = serverResp.getResult();
+
+                System.out.println("Final result"+new ObjectMapper().writeValueAsString(dmnResult));
 
                 DMNDecisionResult resultOffer = dmnResult.getDecisionResultByName("Invoke?");
                 DMNDecisionResult playbook = dmnResult.getDecisionResultByName("Playbook");
