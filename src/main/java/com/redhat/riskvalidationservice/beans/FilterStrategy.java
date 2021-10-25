@@ -82,10 +82,10 @@ public class FilterStrategy implements AggregationStrategy {
 
                 DMNResult dmnResult = serverResp.getResult();
 
-//                DMNDecisionResult resultOffer = dmnResult.getDecisionResultByName("Invoke?");
+                DMNDecisionResult resultOffer = dmnResult.getDecisionResultByName("Invoke?");
                 DMNDecisionResult playbook = dmnResult.getDecisionResultByName("Playbook");
 
-//                System.out.println("invoke" + resultOffer.getResult());
+                System.out.println("invoke" + resultOffer.getResult());
                 System.out.println("playbook" + playbook.getResult());
 
 
