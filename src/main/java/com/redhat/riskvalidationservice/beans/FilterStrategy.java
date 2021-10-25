@@ -27,7 +27,7 @@ public class FilterStrategy implements AggregationStrategy {
         try {
 
             RestTemplate restTemplate = new RestTemplate();
-            String baseUri = "http://rhpam-trial-kieserver:8080/services/rest/server/containers/EventAutomationDecision_3.0.0/dmn/models/ProcessFailureDMN/dmnresult";
+            String baseUri = "http://rhpam-trial-kieserver:8080/services/rest/server/containers/DMNListExample/dmn/models/ProcessFailureDMN/dmnresult";
 
             org.springframework.http.HttpHeaders httpHeaders = new HttpHeaders();
             httpHeaders.set("accept","application/json");
@@ -110,26 +110,7 @@ public class FilterStrategy implements AggregationStrategy {
                     }
                 }
 
-//                ServiceResponse<DMNResult> serverResp =
-//                        dmnClient.evaluateDecisionByName("EventAutomationDecision_2.0.0",
-//                                namespace,
-//                                modelName,
-//                                "Playbook",
-//                                dmnContext);
-//
-//                System.out.println("DMN rsponse"+new ObjectMapper().writeValueAsString(serverResp.getMsg()));
-//
-//                DMNResult dmnResult = serverResp.getResult();
-//
-//                System.out.println("Final result"+new ObjectMapper().writeValueAsString(dmnResult.getDecisionResults()));
-//
-//                DMNDecisionResult resultOffer = dmnResult.getDecisionResultByName("Invoke?");
-//                DMNDecisionResult playbook = dmnResult.getDecisionResultByName("Playbook");
-//
-//                System.out.println("invoke" + resultOffer.getResult());
-//                System.out.println("playbook" + playbook.getResult());
-//
-//
+
                 if (playbook!= null) {
                     ApbRuns apb = new ApbRuns();
                     apb.setApbName(playbook);
