@@ -12,6 +12,10 @@ import org.kie.server.api.marshalling.MarshallingFormat;
 import org.kie.server.api.model.ServiceResponse;
 import org.kie.server.client.*;
 import org.kie.server.client.credentials.EnteredCredentialsProvider;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.*;
 
@@ -21,6 +25,16 @@ public class FilterStrategy implements AggregationStrategy {
     @Override
     public Exchange aggregate(Exchange oldExchange, Exchange newExchange) {
         try {
+
+            RestTemplate restTemplate = new RestTemplate();
+            String baseUri = "http://rhpam-trial-kieserver-http-self-healing.apps.cluster-4htkm.4htkm.sandbox210.opentlc.com/services/rest/server/containers/EventAutomationDecision_2.0.0/dmn/models/ProcessFailureDMN/dmnresult";
+
+            org.springframework.http.HttpHeaders httpHeaders = new HttpHeaders();
+            httpHeaders.set("accept","application/json");
+            httpHeaders.set("content-type","application/json");
+            httpHeaders.set("Authorization","Basic YWRtaW5Vc2VyOlJlZEhhdA==");
+
+
 
             System.out.println("hello");
             CredentialsProvider credentialsProvider = new EnteredCredentialsProvider("adminUser", "RedHat");
@@ -73,33 +87,52 @@ public class FilterStrategy implements AggregationStrategy {
                 dmnContext.set("Frequency", 2);
                 dmnContext.set("Interval", 1);
 
+                String json = "{\"SensuEvents\":"+dmnContext.get("SensuEvents")+",\"ApbRuns\""+dmnContext.get("ApbRuns")+",\"Frequency\""+dmnContext.get("Frequency")+",\"Interval\""+dmnContext.get("Interval")+"}";
+                System.out.println(json);
+
                 System.out.println("dmn context"+dmnContext.get("SensuEvents")+","+dmnContext.get("ApbRuns")+","+dmnContext.get("Frequency")+","+
                         dmnContext.get("Interval"));
 
+                HttpEntity request = new HttpEntity(json,httpHeaders);
 
-                ServiceResponse<DMNResult> serverResp =
-                        dmnClient.evaluateDecisionByName("EventAutomationDecision_2.0.0",
-                                namespace,
-                                modelName,
-                                "Playbook",
-                                dmnContext);
+                ResponseEntity<String> result = restTemplate.postForEntity(baseUri,request,String.class);
 
-                System.out.println("DMN rsponse"+new ObjectMapper().writeValueAsString(serverResp.getMsg()));
+                String respString = result.getBody();
 
-                DMNResult dmnResult = serverResp.getResult();
+                Map map = new ObjectMapper().readValue(respString,HashMap.class);
+                List<Map> decisionResults = (ArrayList)map.get("decisionResults");
+                System.out.println(decisionResults);
+                String playbook = null;
+                for(Map resultMap: decisionResults) {
+                    if(resultMap.get("decisionName").equals("Playbook")){
+                        System.out.println(resultMap.get("result"));
+                        playbook = (String)resultMap.get("result");
+                    }
+                }
 
-                System.out.println("Final result"+new ObjectMapper().writeValueAsString(dmnResult.getDecisionResults()));
-
-                DMNDecisionResult resultOffer = dmnResult.getDecisionResultByName("Invoke?");
-                DMNDecisionResult playbook = dmnResult.getDecisionResultByName("Playbook");
-
-                System.out.println("invoke" + resultOffer.getResult());
-                System.out.println("playbook" + playbook.getResult());
-
-
-                if (playbook.getResult() != null) {
+//                ServiceResponse<DMNResult> serverResp =
+//                        dmnClient.evaluateDecisionByName("EventAutomationDecision_2.0.0",
+//                                namespace,
+//                                modelName,
+//                                "Playbook",
+//                                dmnContext);
+//
+//                System.out.println("DMN rsponse"+new ObjectMapper().writeValueAsString(serverResp.getMsg()));
+//
+//                DMNResult dmnResult = serverResp.getResult();
+//
+//                System.out.println("Final result"+new ObjectMapper().writeValueAsString(dmnResult.getDecisionResults()));
+//
+//                DMNDecisionResult resultOffer = dmnResult.getDecisionResultByName("Invoke?");
+//                DMNDecisionResult playbook = dmnResult.getDecisionResultByName("Playbook");
+//
+//                System.out.println("invoke" + resultOffer.getResult());
+//                System.out.println("playbook" + playbook.getResult());
+//
+//
+//                if (playbook.getResult() != null) {
                     ApbRuns apb = new ApbRuns();
-                    apb.setApbName(playbook.getResult().toString());
+                    apb.setApbName(playbook);
                     apb.setCheckName(sensuEvents.getCheckType());
                     apb.setHostName(sensuEvents.getHostName());
                     apb.setRunDate(new Date().getTime());
@@ -107,10 +140,10 @@ public class FilterStrategy implements AggregationStrategy {
 
                     newExchange.getIn().setBody(new Gson().toJson(apb));
 
-                } else {
-                    newExchange.getIn().setBody(null);
-                }
-
+//                } else {
+//                    newExchange.getIn().setBody(null);
+//                }
+//
 
             } else {
                 Map<String, List<ApbRuns>> map = newExchange.getIn().getBody(Map.class);
