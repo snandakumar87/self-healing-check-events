@@ -28,6 +28,8 @@ public class FilterStrategy implements AggregationStrategy {
             KieServicesConfiguration kieServicesConfig = KieServicesFactory.newRestConfiguration("http://rhpam-trial-kieserver-http-self-healing.apps.cluster-4htkm.4htkm.sandbox210.opentlc.com/services/rest/server", credentialsProvider);
 
 
+
+
             KieServicesClient kieServicesClient = KieServicesFactory.newKieServicesClient(kieServicesConfig);
 
             DMNServicesClient dmnClient = kieServicesClient.getServicesClient(DMNServicesClient.class);
@@ -59,7 +61,7 @@ public class FilterStrategy implements AggregationStrategy {
                 HashMap<String, List<ApbRuns>> aggregateMap = null;
 
                 DMNContext dmnContext = dmnClient.newContext();
-                dmnContext.set("SensuEvents", sensuEvents);
+                dmnContext.set("SensuEvents", new ObjectMapper().writeValueAsString(sensuEvents));
                 if (null != runs && runs.get(example.getEntity().getSystem().getHostname()) != null) {
                     dmnContext.set("ApbRuns", runs.get(example.getEntity().getSystem().getHostname()));
                     System.out.println(runs.get(example.getEntity().getSystem().getHostname()));
