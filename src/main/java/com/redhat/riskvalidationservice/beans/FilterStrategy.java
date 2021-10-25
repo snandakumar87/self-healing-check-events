@@ -27,7 +27,7 @@ public class FilterStrategy implements AggregationStrategy {
         try {
 
             RestTemplate restTemplate = new RestTemplate();
-            String baseUri = "http://rhpam-trial-kieserver-http-self-healing.apps.cluster-4htkm.4htkm.sandbox210.opentlc.com/services/rest/server/containers/EventAutomationDecision_2.0.0/dmn/models/ProcessFailureDMN/dmnresult";
+            String baseUri = "http://rhpam-trial-kieserver:8080/services/rest/server/containers/EventAutomationDecision_1.0.0/dmn/models/ProcessFailureDMN/dmnresult";
 
             org.springframework.http.HttpHeaders httpHeaders = new HttpHeaders();
             httpHeaders.set("accept","application/json");
@@ -36,7 +36,6 @@ public class FilterStrategy implements AggregationStrategy {
 
 
 
-            System.out.println("hello");
             CredentialsProvider credentialsProvider = new EnteredCredentialsProvider("adminUser", "RedHat");
 
             KieServicesConfiguration kieServicesConfig = KieServicesFactory.newRestConfiguration("http://rhpam-trial-kieserver-http-self-healing.apps.cluster-4htkm.4htkm.sandbox210.opentlc.com/services/rest/server", credentialsProvider);
@@ -48,7 +47,6 @@ public class FilterStrategy implements AggregationStrategy {
 
             DMNServicesClient dmnClient = kieServicesClient.getServicesClient(DMNServicesClient.class);
 
-            System.out.println("read clients");
             if (newExchange.getFromRouteId().equals("readSensu")) {
 
                 System.out.println("inside validate");
@@ -146,6 +144,8 @@ public class FilterStrategy implements AggregationStrategy {
 
 
             } else {
+
+                System.out.println("came here");
                 Map<String, List<ApbRuns>> map = newExchange.getIn().getBody(Map.class);
 
                 for (String key : map.keySet()) {
