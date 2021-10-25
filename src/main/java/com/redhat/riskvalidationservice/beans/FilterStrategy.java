@@ -61,7 +61,7 @@ public class FilterStrategy implements AggregationStrategy {
                 HashMap<String, List<ApbRuns>> aggregateMap = null;
 
                 DMNContext dmnContext = dmnClient.newContext();
-                dmnContext.set("SensuEvents", new Gson().toJson(sensuEvents));
+                dmnContext.set("SensuEvents", sensuEvents);
                 if (null != runs && runs.get(example.getEntity().getSystem().getHostname()) != null) {
                     dmnContext.set("ApbRuns", runs.get(example.getEntity().getSystem().getHostname()));
                     System.out.println(runs.get(example.getEntity().getSystem().getHostname()));
