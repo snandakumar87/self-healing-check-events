@@ -78,9 +78,10 @@ public class FilterStrategy implements AggregationStrategy {
 
 
                 ServiceResponse<DMNResult> serverResp =
-                        dmnClient.evaluateAll("EventAutomationDecision_2.0.0",
+                        dmnClient.evaluateDecisionByName("EventAutomationDecision_2.0.0",
                                 namespace,
                                 modelName,
+                                "Playbook",
                                 dmnContext);
 
                 System.out.println("DMN rsponse"+new ObjectMapper().writeValueAsString(serverResp.getMsg()));
