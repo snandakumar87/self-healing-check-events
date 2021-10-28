@@ -32,13 +32,13 @@ public class FilterStrategy implements AggregationStrategy {
             org.springframework.http.HttpHeaders httpHeaders = new HttpHeaders();
             httpHeaders.set("accept","application/json");
             httpHeaders.set("content-type","application/json");
-           // httpHeaders.set("Authorization","Basic YWRtaW5Vc2VyOmM3bHB4WExh");
-            httpHeaders.set("Authorization","Basic YWRtaW5Vc2VyOlJlZEhhdA==");
+            httpHeaders.set("Authorization","Basic YWRtaW5Vc2VyOmM3bHB4WExh");
+           // httpHeaders.set("Authorization","Basic YWRtaW5Vc2VyOlJlZEhhdA==");
 
 
 
-         //   CredentialsProvider credentialsProvider = new EnteredCredentialsProvider("adminUser", "c7lpxXLa");
-            CredentialsProvider credentialsProvider = new EnteredCredentialsProvider("adminUser", "RedHat");
+         CredentialsProvider credentialsProvider = new EnteredCredentialsProvider("adminUser", "c7lpxXLa");
+            //CredentialsProvider credentialsProvider = new EnteredCredentialsProvider("adminUser", "RedHat");
             
             
 
