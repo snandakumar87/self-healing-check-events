@@ -47,7 +47,7 @@ public class RiskValidationRouteBuilder extends RouteBuilder {
 					.to("direct:sensuevents");
 			from("direct:sensuevents")
 					.aggregate(body().tokenize(), new FilterStrategy()).completionInterval(2000)
-					.log("${body}")
+					.log("response aggregator"+"${body}")
 					.bean(RiskValidationBean.class,"addReferenceData")
 					.choice()
 					.when(body().isNotEqualTo("Rule Check Failed"))
