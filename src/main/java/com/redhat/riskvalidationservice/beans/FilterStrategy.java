@@ -113,6 +113,8 @@ public class FilterStrategy implements AggregationStrategy {
                         }
                     }
                 }
+                
+                System.out.println("outside the for block"+playbook);
 
 
                 if (playbook!= null) {
