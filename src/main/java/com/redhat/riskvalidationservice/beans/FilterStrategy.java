@@ -36,7 +36,7 @@ public class FilterStrategy implements AggregationStrategy {
 
 
 
-            CredentialsProvider credentialsProvider = new EnteredCredentialsProvider("adminUser", "RedHat");
+            CredentialsProvider credentialsProvider = new EnteredCredentialsProvider("adminUser", "c7lpxXLa");
 
             KieServicesConfiguration kieServicesConfig = KieServicesFactory.newRestConfiguration("http://rhpam-trial-kieserver:8080/services/rest/server", credentialsProvider);
 
