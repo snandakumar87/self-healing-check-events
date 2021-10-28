@@ -122,6 +122,7 @@ public class FilterStrategy implements AggregationStrategy {
                     apb.setCheckName(sensuEvents.getCheckType());
                     apb.setHostName(sensuEvents.getHostName());
                     apb.setRunDate(new Date().getTime());
+                    System.out.printn("apb"+new Gson().toJson(apb));
 
 
                     newExchange.getIn().setBody(new Gson().toJson(apb));
