@@ -108,9 +108,9 @@ public class FilterStrategy implements AggregationStrategy {
                 for(Map resultMap: decisionResults) {
                     if(resultMap.get("decisionName").equals("Playbook")){
                         System.out.println(resultMap.get("result"));
-                        if(playbook != null) {
+                       
                             playbook = (String) resultMap.get("result");
-                        }
+                        
                     }
                 }
                 
