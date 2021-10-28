@@ -112,6 +112,7 @@ public class FilterStrategy implements AggregationStrategy {
 
 
                 if (playbook!= null) {
+                    System.out.println("inside APB runs");
                     ApbRuns apb = new ApbRuns();
                     apb.setApbName(playbook);
                     apb.setCheckName(sensuEvents.getCheckType());
